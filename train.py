@@ -303,26 +303,26 @@ class Train:
 
         ## test phase
         with torch.no_grad():
+            n_output = 1000
             netG.eval()
             # netG.train()
 
-            input = torch.randn(batch_size, nch_in, ny_in, nx_in).to(device)
+            input = torch.randn(n_output, nch_in, ny_in, nx_in).to(device)
 
             output = netG(input)
 
             output = transform_inv(output)
 
             for j in range(output.shape[0]):
-                name = j
+                name = j + 1
                 fileset = {'name': name,
-                            'output': "%04d-output.png" % name}
+                            'output': "%d.png" % name}
 
                 if nch_out == 3:
                     plt.imsave(os.path.join(dir_result_save, fileset['output']), output[j, :, :, :].squeeze())
                 elif nch_out == 1:
                     plt.imsave(os.path.join(dir_result_save, fileset['output']), output[j, :, :, :].squeeze(), cmap=cm.gray)
 
-                append_index(dir_result, fileset)
 
 
 def set_requires_grad(nets, requires_grad=False):
