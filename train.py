@@ -316,7 +316,7 @@ class Train:
             for j in range(output.shape[0]):
                 name = j + 1
                 fileset = {'name': name,
-                            'output': "%d.png" % name}
+                            'output': "%d.jpg" % name}
 
                 if nch_out == 3:
                     plt.imsave(os.path.join(dir_result_save, fileset['output']), output[j, :, :, :].squeeze())
